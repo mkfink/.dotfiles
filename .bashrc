@@ -76,6 +76,24 @@ export GIT_PS1_SHOWUPSTREAM="auto"     # 'u='=no difference, 'u+1'=ahead by 1 co
 export GIT_PS1_STATESEPARATOR=" "
 export GIT_PS1_DESCRIBE_STYLE="describe"  # detached HEAD style:
 
+#From https://stackoverflow.com/questions/10406926/how-do-i-change-the-default-virtualenv-prompt/20026992#20026992
+function virtualenv_info(){
+    # Get Virtual Env
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        # Strip out the path and just leave the env name
+        venv="${VIRTUAL_ENV##*/}"
+    else
+        # In case you don't have one activated
+        venv=''
+    fi
+    [[ -n "$venv" ]] && echo "($venv) "
+}
+
+# disable the default virtualenv prompt change
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+VENV="$BCya\$(virtualenv_info)";
+
 if __colour_enabled; then
     export GIT_PS1_SHOWCOLORHINTS=1
 
@@ -92,17 +110,11 @@ if __colour_enabled; then
         tmux=""
     fi
 
-    if test -z "$VIRTUAL_ENV" ; then
-        PYVENV=""
-    else
-        PYVENV="${BCya}(`basename \"$VIRTUAL_ENV\"`) "
-    fi
-
     # http://serverfault.com/a/425657/228348
     hostnamecolor=$(hostname | od | tr ' ' '\n' | awk '{total = total + $1}END{print 30 + (total % 6)}')
 
     #the first bit just shows the return code if nonzero, in red
-    myFancyPS1Start="${debian_chroot:+($debian_chroot)}$Red\${?##0}$PYVENV$Gre\u@\[\e[${hostnamecolor}m\]\h$tmux$sudo:$Blu\w$None"
+    myFancyPS1Start="${debian_chroot:+($debian_chroot)}$Red\${?##0}$VENV$Gre\u@\[\e[${hostnamecolor}m\]\h$tmux$sudo:$Blu\w$None"
     myFancyPS1End="$None$ "
     PROMPT_COMMAND='__git_ps1 "$myFancyPS1Start" "$myFancyPS1End"'
 else
