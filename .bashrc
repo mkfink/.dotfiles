@@ -113,6 +113,10 @@ if __colour_enabled; then
     # http://serverfault.com/a/425657/228348
     hostnamecolor=$(hostname | od | tr ' ' '\n' | awk '{total = total + $1}END{print 30 + (total % 6)}')
 
+    if [ $hostnamecolor -eq '30' ]
+    then
+        hostnamecolor=94
+    fi
     #the first bit just shows the return code if nonzero, in red
     myFancyPS1Start="${debian_chroot:+($debian_chroot)}$Red\${?##0}$VENV$Gre\u@\[\e[${hostnamecolor}m\]\h$tmux$sudo:$Blu\w$None"
     myFancyPS1End="$None$ "
