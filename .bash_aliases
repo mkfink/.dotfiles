@@ -32,31 +32,28 @@ extract () {
 }
 
 # Tab completion for tmux sessions.
-# Quickly open new tmux sessions in your projects dir.
-
-# Setup:
-# Source this code in your bash shell.
-# Update the code_dir var with the root directory of your source code.
-
-# Usage:
-
+# Quickly open new and existing tmux sessions
+# tat() Usage:
+# Use tat to open the last session
+# $ tat
 # Use the tab to open an existing session.
 # $ tat [TAB]
-
-# Arguments that are passed to tat will be used to create a new session.
-# Tat will open a new tmux session and set the default path to the found dir. 
-# $ tat payments
-# $ pwd
-# /code_dir/payments 
+# Use tat sessionname to create or open an existing named session
+# $ tat foo
 
 tat()
 {
-  local session_name="$1"
-  tmuxp load $session_name
-  if [ $? -ne 0 ]; then
-    echo "tat() is creating new tmux session with name=$session_name"
-    tmux new-session -d -s "$session_name"
-    tmux attach-session -t "$session_name"
+  if [ -z "$1" ]; then
+    echo "attaching to last session"
+    tmux a
+  else
+    local session_name="$1"
+    tmuxp load $session_name
+    if [ $? -ne 0 ]; then
+      echo "tat() is creating new tmux session with name=$session_name"
+      tmux new-session -d -s "$session_name"
+      tmux attach-session -t "$session_name"
+    fi
   fi
 }
 _tat()
