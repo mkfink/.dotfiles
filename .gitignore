@@ -1,1 +1,4 @@
 .bash_local
+tmux-themepack
+.git-completion.bash
+.git-prompt.sh

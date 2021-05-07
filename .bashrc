@@ -1,6 +1,9 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 
+source /data/.dotfiles/.git-completion.bash
+source /data/.dotfiles/.git-prompt.sh
+
 # Check if we support colours
 __colour_enabled() {
     local -i colors=$(tput colors 2>/dev/null)
@@ -32,8 +35,8 @@ fi
 
 
 #allow machine specific config
-if [ -f ~/.bash_local ]; then
-    . ~/.bash_local
+if [ -f /data/.dotfiles/.bash_local ]; then
+    . /data/.dotfiles/.bash_local
 fi
 
 # If not running interactively, don't do anything
@@ -135,8 +138,8 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # Alias definitions.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f /data/.dotfiles/.bash_aliases ]; then
+    . /data/.dotfiles/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
