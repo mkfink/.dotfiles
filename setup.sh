@@ -11,3 +11,5 @@ rm /root/.tmux.conf
 ln -s /data/.dotfiles/.tmux.conf ~/.tmux.conf
 tmux source-file /data/.dotfiles/.tmux.conf
 source /data/.dotfiles/.bashrc
+git config --global user.name mkfink
+git config --global user.email mkfink@gmail.com
