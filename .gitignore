@@ -1,1 +1,4 @@
 .bash_local
+.git-prompt.sh
+.git-completion.bash
+backup

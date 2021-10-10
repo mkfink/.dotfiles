@@ -1,6 +1,11 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 
+export PATH=$PATH:~/.local/bin
+
+source ~/.dotfiles/.git-completion.bash
+source ~/.dotfiles/.git-prompt.sh
+
 # Check if we support colours
 __colour_enabled() {
     local -i colors=$(tput colors 2>/dev/null)
@@ -113,7 +118,7 @@ if __colour_enabled; then
     # http://serverfault.com/a/425657/228348
     hostnamecolor=$(hostname | od | tr ' ' '\n' | awk '{total = total + $1}END{print 30 + (total % 6)}')
 
-    if [ $hostnamecolor -eq '30' ]
+    if [ $hostnamecolor -eq '30' ] || [ $hostnamecolor -eq '31' ]
     then
         hostnamecolor=94
     fi
