@@ -2,6 +2,7 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 
 export PATH=$PATH:~/.local/bin
+export TMUXP_CONFIGDIR=~/.tmux/.tmuxp/
 
 source ~/.dotfiles/.git-completion.bash
 source ~/.dotfiles/.git-prompt.sh
@@ -102,14 +103,7 @@ VENV="$BCya\$(virtualenv_info)";
 if __colour_enabled; then
     export GIT_PS1_SHOWCOLORHINTS=1
 
-    #A way to show if user is in groups wheel, sudo, or adm
-    if [[ `groups` =~ wheel|sudo|adm ]]; then
-        sudo="\[\e[32m\](s)\[\e[m\]"
-    else
-        sudo="\[\e[31m\](ns)\[\e[m\]"
-    fi
-
-    if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+    if ! { [ -n "$TMUX" ]; } then
         tmux="$Red[nT]"
     else
         tmux=""
