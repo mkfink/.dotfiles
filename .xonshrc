@@ -1,0 +1,38 @@
+from xonsh.tools import register_custom_style
+
+mystyle = {
+    'RED': '#ff4747',
+    'BOLD_RED': '#ff3636',
+    'PURPLE': '#ff00cc',
+    'BOLD_PURPLE': '#c900b5',
+    'INTENSE_BLACK': '#888888',
+    'Token.Error': '#ba0ba9',
+    'Token.Comment.Single': '#9c9c9c',
+    'Token.Comment': '#9c9c9c',
+    'Token.Generic.Subheading': '#9c9c9c'
+}
+$XONSH_GITSTATUS_LINES_ADDED = '{GREEN}+'
+$XONSH_GITSTATUS_STASHED = ' 🗋'
+$XONSH_GITSTATUS_UNTRACKED = '{INTENSE_BLACK} u'
+# XONSH WIZARD START
+source-bash "echo loading xonsh foreign shell"
+# XONSH WIZARD END
+# XONSH WEBCONFIG START
+
+$FOREIGN_ALIASES_SUPPRESS_SKIP_MESSAGE = True
+
+# Coloured man page support
+# using 'less' env vars (format is '\E[<brightness>;<colour>m')
+$LESS_TERMCAP_mb = "\033[01;92m"     # begin blinking
+$LESS_TERMCAP_md = "\033[01;92m"     # begin bold
+$LESS_TERMCAP_me = "\033[0m"         # end mode
+$LESS_TERMCAP_so = "\033[01;44;36m"  # begin standout-mode (bottom of screen)
+$LESS_TERMCAP_se = "\033[0m"         # end standout-mode
+$LESS_TERMCAP_us = "\033[00;36m"     # begin underline
+$LESS_TERMCAP_ue = "\033[0m"         # end underline
+
+$PROMPT = '{BOLD_INTENSE_CYAN}┌──{env_name}{BOLD_INTENSE_CYAN}({GREEN}{user}@{INTENSE_YELLOW}{hostname}{BOLD_INTENSE_CYAN}){RESET}:{BOLD_BLUE}{cwd}{RESET} ({gitstatus})\n{BOLD_INTENSE_CYAN}└─☃{RESET} '
+register_custom_style("mystyle", mystyle, base="monokai")
+$XONSH_COLOR_STYLE = 'mystyle'
+xontrib load apt_tabcomplete
+# XONSH WEBCONFIG END
