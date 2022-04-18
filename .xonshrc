@@ -14,6 +14,9 @@ mystyle = {
 $XONSH_GITSTATUS_LINES_ADDED = '{GREEN}+'
 $XONSH_GITSTATUS_STASHED = ' 🗋'
 $XONSH_GITSTATUS_UNTRACKED = '{INTENSE_BLACK} u'
+
+$VC_BRANCH_TIMEOUT=0.25
+
 # XONSH WIZARD START
 source-bash "echo loading xonsh foreign shell"
 # XONSH WIZARD END
@@ -31,8 +34,9 @@ $LESS_TERMCAP_se = "\033[0m"         # end standout-mode
 $LESS_TERMCAP_us = "\033[00;36m"     # begin underline
 $LESS_TERMCAP_ue = "\033[0m"         # end underline
 
-$PROMPT = '{BOLD_INTENSE_CYAN}┌──{env_name}{BOLD_INTENSE_CYAN}({GREEN}{user}@{INTENSE_YELLOW}{hostname}{BOLD_INTENSE_CYAN}){RESET}:{BOLD_BLUE}{cwd}{RESET} ({gitstatus})\n{BOLD_INTENSE_CYAN}└─☃{RESET} '
+$PROMPT = '{BOLD_INTENSE_CYAN}┌─{env_name}{BOLD_INTENSE_CYAN}({GREEN}{user}@{INTENSE_YELLOW}{hostname}{BOLD_INTENSE_CYAN}){RESET}:{BOLD_BLUE}{cwd}{RESET} ({gitstatus})\n{BOLD_INTENSE_CYAN}└☃{RESET} '
 register_custom_style("mystyle", mystyle, base="monokai")
 $XONSH_COLOR_STYLE = 'mystyle'
 xontrib load apt_tabcomplete
 # XONSH WEBCONFIG END
+#xontrib load argcomplete
